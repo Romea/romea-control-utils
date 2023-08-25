@@ -1,0 +1,24 @@
+test_command_factory:
+  ros__parameters:
+    follow_me:
+      gains:
+        kp: 1.
+        ki: 2.
+        kd: 3.
+        kdd: 4.
+
+    classic_sliding:
+      gains:
+        front_kp: 5.
+        rear_kp: 6.
+
+    predictive_sliding:
+      gains:
+        front_kp: 7.
+        rear_kp: 8.
+      prediction:
+        horizon: 9.
+        a0: 10.
+        a1: 11.
+        b1: 12.
+        b2: 13.

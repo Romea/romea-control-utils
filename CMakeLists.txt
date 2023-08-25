@@ -15,17 +15,18 @@ find_package(romea_core_common REQUIRED)
 find_package(romea_core_control REQUIRED)
 find_package(romea_common_utils REQUIRED)
 
-# add_library(${PROJECT_NAME} SHARED
-# )
+# create a header only library -> INTERACE
+add_library(${PROJECT_NAME} INTERFACE
+)
 
-# ament_target_dependencies(${PROJECT_NAME}
-#   rclcpp
-#   romea_core_common
-#   romea_core_control
-#   romea_common_utils  
-# )
+ament_target_dependencies(${PROJECT_NAME} INTERFACE
+  rclcpp
+  romea_core_common
+  romea_core_control
+  romea_common_utils  
+)
 
-# target_include_directories(${PROJECT_NAME} PUBLIC include)
+target_include_directories(${PROJECT_NAME} INTERFACE include)
 
 # install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
 
@@ -36,7 +37,7 @@ if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   list(APPEND AMENT_LINT_AUTO_EXCLUDE ament_cmake_copyright)
   ament_lint_auto_find_test_dependencies()
-  # add_subdirectory(test)
+  add_subdirectory(test)
 endif()
 
 ament_package()
