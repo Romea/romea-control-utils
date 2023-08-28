@@ -24,26 +24,29 @@ namespace romea
 {
 
 template<typename Node>
-void declare_inertia_params(std::shared_ptr<Node> node, const std::string & parameters_ns)
+void declare_inertia_params(std::shared_ptr<Node> node, const std::string & params_ns)
 {
-  declare_parameter<double>(node, parameters_ns, "chassis.mass");
-  declare_eigen_vector_parameter(node, parameters_ns, "chassis.mass_center_position");
-  declare_parameter<double>(node, parameters_ns, "kinematic.z_inertial_moment");
+  declare_parameter<double>(node, params_ns, "chassis.mass");
+  declare_eigen_vector_parameter<Eigen::Vector3d>(node, params_ns, "chassis.mass_center_position");
+  declare_parameter<double>(node, params_ns, "kinematic.z_inertial_moment");
 }
 
 template<typename Node>
-void get_inertia_params(std::shared_ptr<Node> node, InertiaParameters & parameters)
+void get_inertia_params(
+  std::shared_ptr<Node> node, const std::string & params_ns, InertiaParameters & parameters)
 {
-  parameters.mass = get_parameter<double>(node, "chassis.mass");
-  parameters.massCenter = get_eigen_vector_parameter(node, "chassis.mass_center_position");
-  parameters.zInertialMoment = get_parameter<double>(node, "kinematic.z_inertial_moment");
+  parameters.mass = get_parameter<double>(node, params_ns, "chassis.mass");
+  parameters.massCenter =
+    get_eigen_vector_parameter<Eigen::Vector3d>(node, params_ns, "chassis.mass_center_position");
+  parameters.zInertialMoment =
+    get_parameter<double>(node, params_ns, "kinematic.z_inertial_moment");
 }
 
 template<typename Node>
-InertiaParameters get_inertia_params(std::shared_ptr<Node> node)
+InertiaParameters get_inertia_params(std::shared_ptr<Node> node, const std::string & params_ns)
 {
   InertiaParameters parameters;
-  get_inertia_params(std::move(node), parameters);
+  get_inertia_params(std::move(node), params_ns, parameters);
   return parameters;
 }
 

@@ -1,0 +1,20 @@
+test_observer_factory:
+  ros__parameters:
+    linear_tangent:
+      gain:
+        lateral_deviation: 1.
+        course_deviation: 2.
+      filter_weigths:
+        lateral_deviation: 3.
+        course_deviation: 4.
+        front_sliding_angle: 5.
+        rear_sliding_angle: 6.
+
+    lyapounov:
+      gains:
+        x_deviation: 7.
+        y_deviation: 8.
+        course_deviation: 9.
+        front_sliding_angle: 10.
+        rear_sliding_angle: 11.
+

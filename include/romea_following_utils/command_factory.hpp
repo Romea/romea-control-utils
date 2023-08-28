@@ -28,7 +28,7 @@ namespace romea
 {
 
 template<typename Node>
-void declare_follow_me_parameters(std::shared_ptr<Node> node, std::string params_ns)
+void declare_follow_me_parameters(std::shared_ptr<Node> node, const std::string & params_ns)
 {
   declare_parameter<double>(node, params_ns, "gains.kp");
   declare_parameter<double>(node, params_ns, "gains.ki");
@@ -38,7 +38,7 @@ void declare_follow_me_parameters(std::shared_ptr<Node> node, std::string params
 
 template<typename Node>
 void declare_follow_trajectory_classic_sliding_parameters(
-  std::shared_ptr<Node> node, std::string params_ns)
+  std::shared_ptr<Node> node, const std::string & params_ns)
 {
   declare_parameter<double>(node, params_ns, "gains.front_kp");
   declare_parameter<double>(node, params_ns, "gains.rear_kp");
@@ -46,7 +46,7 @@ void declare_follow_trajectory_classic_sliding_parameters(
 
 template<typename Node>
 void declare_follow_trajectory_predictive_sliding_parameters(
-  std::shared_ptr<Node> node, std::string params_ns)
+  std::shared_ptr<Node> node, const std::string & params_ns)
 {
   declare_parameter<double>(node, params_ns, "gains.front_kp");
   declare_parameter<double>(node, params_ns, "gains.rear_kp");
@@ -59,7 +59,7 @@ void declare_follow_trajectory_predictive_sliding_parameters(
 
 template<typename Node>
 void get_params(
-  std::shared_ptr<Node> node, std::string params_ns, FollowMe::Parameters & parameters)
+  std::shared_ptr<Node> node, const std::string & params_ns, FollowMe::Parameters & parameters)
 {
   parameters.kp = get_parameter<double>(node, params_ns, "gains.kp");
   parameters.ki = get_parameter<double>(node, params_ns, "gains.ki");
@@ -69,7 +69,7 @@ void get_params(
 
 template<typename Node>
 void get_params(
-  std::shared_ptr<Node> node, std::string params_ns,
+  std::shared_ptr<Node> node, const std::string & params_ns,
   FollowTrajectoryClassicSliding::Parameters & parameters)
 {
   parameters.front_kp = get_parameter<double>(node, params_ns, "gains.front_kp");
@@ -78,7 +78,7 @@ void get_params(
 
 template<typename Node>
 void get_params(
-  std::shared_ptr<Node> node, std::string params_ns,
+  std::shared_ptr<Node> node, const std::string & params_ns,
   FollowTrajectoryPredictiveSliding::Parameters & parameters)
 {
   parameters.front_kp = get_parameter<double>(node, params_ns, "gains.front_kp");
@@ -92,7 +92,7 @@ void get_params(
 
 template<typename CommandType, typename Node, typename... Args>
 std::unique_ptr<CommandType> make_command(
-  std::shared_ptr<Node> node, std::string params_ns, Args &&... args)
+  std::shared_ptr<Node> node, const std::string & params_ns, Args &&... args)
 {
   typename CommandType::Parameters parameters;
   get_params(node, params_ns, parameters);

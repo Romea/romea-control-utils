@@ -1,0 +1,8 @@
+test_inertia_factory:
+  ros__parameters:
+    inertia:
+      chassis:
+        mass: 1.
+        mass_center_position: [2., 3., 4.]
+      kinematic:
+        z_inertial_moment: 5.
