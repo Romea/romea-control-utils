@@ -18,7 +18,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <romea_common_utils/params/node_parameters.hpp>
 #include <romea_core_control/observer/SlidingObserverCinematicLinearTangent.hpp>
-#include <romea_core_control/observer/SlidingObserverCinematicLyapounov.hpp>
+#include <romea_core_control/observer/SlidingObserverCinematicLyapunov.hpp>
 
 namespace romea
 {
@@ -67,7 +67,7 @@ void get_params(
 template<typename Node>
 void get_params(
   std::shared_ptr<Node> node, const std::string & params_ns,
-  SlidingObserverCinematicLyapounov::Parameters & parameters)
+  SlidingObserverCinematicLyapunov::Parameters & parameters)
 {
   parameters.xDeviationGain = get_parameter<double>(node, params_ns, "gains.x_deviation");
   parameters.yDeviationGain = get_parameter<double>(node, params_ns, "gains.y_deviation");
