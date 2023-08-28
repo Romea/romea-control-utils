@@ -55,7 +55,7 @@ TEST_F(TestObserverFactory, getCinematicLinearTangentParams)
 
 TEST_F(TestObserverFactory, getCinematicLyapounovParams)
 {
-  romea::declare_sliding_observer_cinematic_linear_tangent_parameters(node, "lyapounov");
+  romea::declare_sliding_observer_cinematic_lyapounov_parameters(node, "lyapounov");
   romea::SlidingObserverCinematicLyapounov::Parameters params;
   romea::get_params(node, "lyapounov", params);
 

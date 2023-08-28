@@ -1,10 +1,10 @@
 test_observer_factory:
   ros__parameters:
     linear_tangent:
-      gain:
+      gains:
         lateral_deviation: 1.
         course_deviation: 2.
-      filter_weigths:
+      filter_weights:
         lateral_deviation: 3.
         course_deviation: 4.
         front_sliding_angle: 5.
