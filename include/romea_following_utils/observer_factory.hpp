@@ -36,7 +36,7 @@ void declare_sliding_observer_cinematic_linear_tangent_parameters(
 }
 
 template<typename Node>
-void declare_sliding_observer_cinematic_lyapounov_parameters(
+void declare_sliding_observer_cinematic_lyapunov_parameters(
   std::shared_ptr<Node> node, const std::string & params_ns)
 {
   declare_parameter<double>(node, params_ns, "gains.x_deviation");

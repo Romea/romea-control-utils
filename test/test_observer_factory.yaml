@@ -10,7 +10,7 @@ test_observer_factory:
         front_sliding_angle: 5.
         rear_sliding_angle: 6.
 
-    lyapounov:
+    lyapunov:
       gains:
         x_deviation: 7.
         y_deviation: 8.
