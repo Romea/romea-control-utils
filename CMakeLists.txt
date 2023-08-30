@@ -26,11 +26,18 @@ ament_target_dependencies(${PROJECT_NAME} INTERFACE
   romea_common_utils  
 )
 
-target_include_directories(${PROJECT_NAME} INTERFACE include)
+target_include_directories(${PROJECT_NAME} INTERFACE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
 
-# install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
+# install(TARGETS ${PROJECT_NAME} 
+#   LIBRARY DESTINATION lib
+# )
 
 install(DIRECTORY include)
+
+ament_export_include_directories(include)
 
 
 if(BUILD_TESTING)
