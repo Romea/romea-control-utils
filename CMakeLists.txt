@@ -35,7 +35,11 @@ target_include_directories(${PROJECT_NAME} INTERFACE
 #   LIBRARY DESTINATION lib
 # )
 
-install(DIRECTORY include)
+install(
+  DIRECTORY include/
+  DESTINATION include
+)
+
 
 ament_export_include_directories(include)
 
