@@ -19,14 +19,14 @@
 // romea
 #include <romea_following_utils/observer_factory.hpp>
 
-#include "test_helper.h"
+#include "../test/test_helper.h"
 
 class TestObserverFactory : public ::testing::Test
 {
 protected:
-  static void SetUpTestCase() { rclcpp::init(0, nullptr); }
+  static void SetUpTestCase() {rclcpp::init(0, nullptr);}
 
-  static void TearDownTestCase() { rclcpp::shutdown(); }
+  static void TearDownTestCase() {rclcpp::shutdown();}
 
   void SetUp() override
   {
@@ -41,9 +41,10 @@ protected:
 
 TEST_F(TestObserverFactory, getCinematicLinearTangentParams)
 {
-  romea::declare_sliding_observer_cinematic_linear_tangent_parameters(node, "linear_tangent");
-  romea::SlidingObserverCinematicLinearTangent::Parameters params;
-  romea::get_params(node, "linear_tangent", params);
+  romea::core::SlidingObserverCinematicLinearTangent::Parameters params;
+
+  romea::ros2::declare_sliding_observer_cinematic_linear_tangent_parameters(node, "linear_tangent");
+  romea::ros2::get_params(node, "linear_tangent", params);
 
   EXPECT_DOUBLE_EQ(params.lateralDeviationGain, 1.);
   EXPECT_DOUBLE_EQ(params.courseDeviationGain, 2.);
@@ -55,9 +56,10 @@ TEST_F(TestObserverFactory, getCinematicLinearTangentParams)
 
 TEST_F(TestObserverFactory, getCinematicLyapunovParams)
 {
-  romea::declare_sliding_observer_cinematic_lyapunov_parameters(node, "lyapunov");
-  romea::SlidingObserverCinematicLyapunov::Parameters params;
-  romea::get_params(node, "lyapunov", params);
+  romea::core::SlidingObserverCinematicLyapunov::Parameters params;
+
+  romea::ros2::declare_sliding_observer_cinematic_lyapunov_parameters(node, "lyapunov");
+  romea::ros2::get_params(node, "lyapunov", params);
 
   EXPECT_DOUBLE_EQ(params.xDeviationGain, 7.);
   EXPECT_DOUBLE_EQ(params.yDeviationGain, 8.);

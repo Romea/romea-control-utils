@@ -14,19 +14,19 @@
 
 #include <gtest/gtest.h>
 
-#include <rclcpp/rclcpp.hpp>
+#include "rclcpp/rclcpp.hpp"
 
 // romea
-#include <romea_following_utils/command_factory.hpp>
+#include "romea_following_utils/command_factory.hpp"
 
-#include "test_helper.h"
+#include "../test/test_helper.h"
 
 class TestCommandFactory : public ::testing::Test
 {
 protected:
-  static void SetUpTestCase() { rclcpp::init(0, nullptr); }
+  static void SetUpTestCase() {rclcpp::init(0, nullptr);}
 
-  static void TearDownTestCase() { rclcpp::shutdown(); }
+  static void TearDownTestCase() {rclcpp::shutdown();}
 
   void SetUp() override
   {
@@ -41,9 +41,10 @@ protected:
 
 TEST_F(TestCommandFactory, getParameterFollowMe)
 {
-  romea::declare_follow_me_parameters(node, "follow_me");
-  romea::FollowMe::Parameters params;
-  romea::get_params(node, "follow_me", params);
+  romea::core::FollowMe::Parameters params;
+
+  romea::ros2::declare_follow_me_parameters(node, "follow_me");
+  romea::ros2::get_params(node, "follow_me", params);
 
   EXPECT_DOUBLE_EQ(params.kp, 1.);
   EXPECT_DOUBLE_EQ(params.ki, 2.);
@@ -53,9 +54,10 @@ TEST_F(TestCommandFactory, getParameterFollowMe)
 
 TEST_F(TestCommandFactory, getParameterClassicSliding)
 {
-  romea::declare_follow_trajectory_classic_sliding_parameters(node, "classic_sliding");
-  romea::FollowTrajectoryClassicSliding::Parameters params;
-  romea::get_params(node, "classic_sliding", params);
+  romea::core::FollowTrajectoryClassicSliding::Parameters params;
+
+  romea::ros2::declare_follow_trajectory_classic_sliding_parameters(node, "classic_sliding");
+  romea::ros2::get_params(node, "classic_sliding", params);
 
   EXPECT_DOUBLE_EQ(params.front_kp, 5.);
   EXPECT_DOUBLE_EQ(params.rear_kp, 6.);
@@ -63,9 +65,10 @@ TEST_F(TestCommandFactory, getParameterClassicSliding)
 
 TEST_F(TestCommandFactory, getParameterPredictiveSliding)
 {
-  romea::declare_follow_trajectory_predictive_sliding_parameters(node, "predictive_sliding");
-  romea::FollowTrajectoryPredictiveSliding::Parameters params;
-  romea::get_params(node, "predictive_sliding", params);
+  romea::core::FollowTrajectoryPredictiveSliding::Parameters params;
+
+  romea::ros2::declare_follow_trajectory_predictive_sliding_parameters(node, "predictive_sliding");
+  romea::ros2::get_params(node, "predictive_sliding", params);
 
   EXPECT_DOUBLE_EQ(params.front_kp, 7.);
   EXPECT_DOUBLE_EQ(params.rear_kp, 8.);

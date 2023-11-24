@@ -12,15 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef _ROMEA_FOLLOWING_UTILS__OBSERVER_FACTORY_HPP_
-#define _ROMEA_FOLLOWING_UTILS__OBSERVER_FACTORY_HPP_
+#ifndef ROMEA_FOLLOWING_UTILS__OBSERVER_FACTORY_HPP_
+#define ROMEA_FOLLOWING_UTILS__OBSERVER_FACTORY_HPP_
 
-#include <rclcpp/rclcpp.hpp>
+// std
+#include <memory>
+#include <string>
+#include <utility>
+
+// ros
 #include <romea_common_utils/params/node_parameters.hpp>
 #include <romea_core_control/observer/SlidingObserverCinematicLinearTangent.hpp>
 #include <romea_core_control/observer/SlidingObserverCinematicLyapunov.hpp>
 
 namespace romea
+{
+namespace ros2
 {
 
 template<typename Node>
@@ -49,7 +56,7 @@ void declare_sliding_observer_cinematic_lyapunov_parameters(
 template<typename Node>
 void get_params(
   std::shared_ptr<Node> node, const std::string & params_ns,
-  SlidingObserverCinematicLinearTangent::Parameters & parameters)
+  core::SlidingObserverCinematicLinearTangent::Parameters & parameters)
 {
   parameters.lateralDeviationGain =
     get_parameter<double>(node, params_ns, "gains.lateral_deviation");
@@ -67,7 +74,7 @@ void get_params(
 template<typename Node>
 void get_params(
   std::shared_ptr<Node> node, const std::string & params_ns,
-  SlidingObserverCinematicLyapunov::Parameters & parameters)
+  core::SlidingObserverCinematicLyapunov::Parameters & parameters)
 {
   parameters.xDeviationGain = get_parameter<double>(node, params_ns, "gains.x_deviation");
   parameters.yDeviationGain = get_parameter<double>(node, params_ns, "gains.y_deviation");
@@ -78,7 +85,7 @@ void get_params(
     get_parameter<double>(node, params_ns, "gains.rear_sliding_angle");
 }
 
-template<typename ObserverType, typename Node, typename... Args>
+template<typename ObserverType, typename Node, typename ... Args>
 std::unique_ptr<ObserverType> make_observer(
   std::shared_ptr<Node> node, const std::string & params_ns, Args &&... args)
 {
@@ -87,6 +94,7 @@ std::unique_ptr<ObserverType> make_observer(
   return std::make_unique<ObserverType>(std::forward<Args>(args)..., parameters);
 }
 
+}  // namespace ros2
 }  // namespace romea
 
 #endif  // ROMEA_FOLLOWING_UTILS__OBSERVER_FACTORY_HPP_
